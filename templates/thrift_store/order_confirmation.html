@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 24px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            margin-top: 60px;
+            background-color: #333;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #4CAF50;
+        }
+
+        .container {
+            max-width: 800px;
+            background-color: white;
+            margin: 80px auto 20px;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .order-summary {
+            text-align: left;
+            margin: 20px 0;
+        }
+
+        .order-summary h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .order-summary p, .order-summary li {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .order-summary ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .order-summary ul li {
+            margin: 5px 0;
+        }
+
+        .order-summary p strong {
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Thrift Store - Order Confirmation
+    </header>
+    <nav>
+        <a href="{% url 'dashboard' %}">Seller Dashboard</a>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'cart' %}">Cart</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </nav>
+    <div class="container">
+        <h2 class="section-title">Order Confirmation</h2>
+        <div class="order-summary">
+            <h3>Order Summary</h3>
+            <p><strong>Payment Method:</strong> {{ order.payment_method }}</p>
+            <ul>
+                {% for item in order.items.all %}
+                    <li>{{ item.name }} - ₹{{ item.price }}</li>
+                {% endfor %}
+            </ul>
+            <p><strong>Total Amount: ₹{{ order.total_amount }}</strong></p>
+        </div>
+        <p>Thank you for shopping with us. Your order will be delivered soon, and payment will be collected at delivery time.</p>
+    </div>
+    <a href="{% url 'index' %}">Done</a>
+    <footer>
+        © 2024 Thrift Store. All Rights Reserved.
+    </footer>
+</body>
+</html>

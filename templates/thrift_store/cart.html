@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <style>
+        /* Shared CSS with other pages */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 24px;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #333;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+        }
+        nav a:hover {
+            background-color: #4CAF50;
+            border-radius: 5px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 15px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 22px;
+            margin: 20px 0;
+            color: #333;
+        }
+        .cart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .cart-card {
+            background-color: white;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .cart-card img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .cart-card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #333;
+        }
+        .cart-card p {
+            color: #666;
+            font-size: 14px;
+        }
+        .cart-card button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .cart-card button:hover {
+            background-color: #c0392b;
+        }
+        .empty-cart {
+            text-align: center;
+            font-size: 18px;
+            color: #888;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+        .buy-now-btn {
+            display: block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .buy-now-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Thrift Store - Your Cart
+    </header>
+    <nav>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'dashboard' %}">Seller Dashboard</a>
+        <a href="{% url 'cart' %}">Cart</a>
+        <a href="#">Logout</a>
+    </nav>
+    <div class="container">
+        <h2 class="section-title">Your Cart</h2>
+        {% if Products %}
+            <div class="cart-grid">
+                {% for item in Products %}
+                <div class="cart-card">
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                    <h3>{{ item.name }}</h3>
+                    <p>Price: ₹{{ item.price }}</p>
+                    <form method="POST" action="{% url 'remove_from_cart' item.id %}">
+                        {% csrf_token %}
+                        <button>Remove</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+            <a href="{% url 'buy_now' %}" class="buy-now-btn">Buy Now - Cash on Delivery</a>
+        {% else %}
+            <p class="empty-cart">Your cart is empty!</p>
+        {% endif %}
+    </div>
+    <footer>
+        © 2024 Thrift Store. All Rights Reserved.
+    </footer>
+</body>
+</html>
+

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Profile</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .profile-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .cancel-btn {
+            background-color: #f44336;
+        }
+
+        .cancel-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Seller Profile
+    </header>
+    <div class="container">
+        <h2 class="section-title">Update Your Profile</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" value="{{ request.user.first_name }}" required>
+
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" value="{{ request.user.last_name }}" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="{{ request.user.email }}" required>
+
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="phone" value="{{ profile.phone }}" placeholder="Enter your phone number" required>
+
+            <label for="address">Address</label>
+            <textarea id="address" name="address" placeholder="Enter your address">{{ profile.address }}</textarea>
+
+            <label for="bio">Bio</label>
+            <textarea id="bio" name="bio" placeholder="Tell buyers about yourself">{{ profile.bio }}</textarea>
+
+            <div class="profile-actions">
+                <button type="submit">Save Changes</button>
+                <a href="{% url 'dashboard' %}" class="cancel-btn" style="text-decoration: none; color: white; padding: 10px 20px;">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

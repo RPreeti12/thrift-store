@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard - Thrift Store</title>
+    <style>
+        /* CSS for Seller Dashboard */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .dashboard-container {
+            display: flex;
+            padding: 20px;
+        }
+
+        .sidebar {
+            width: 20%;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            height: 100vh;
+        }
+
+        .sidebar h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar a:hover {
+            background-color: #4CAF50;
+        }
+
+        .main-content {
+            width: 80%;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            padding: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .product-card h3 {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .product-card p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .product-card button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .product-card button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Seller Dashboard - Thrift Store
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>Dashboard</h3>
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'view_products' %}">View Products</a>
+            <a href="{% url 'add_product' %}">Add Product</a>
+            <a href="{% url 'dashboard' %}">Seller Dashboard</a>
+            <a href="{% url 'seller_profile' %}">Profile</a>
+            <a href="{% url 'logout' %}">Logout</a>
+
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Seller Info Card -->
+            <div class="card">
+                <h2>Welcome, {{ seller_name }}</h2>
+                <p>Total Products: {{ total_products }} | Total Sales: ₹{{ total_sales }}</p>
+            </div>
+
+            <!-- Product List Section -->
+            <h2>Your Products</h2>
+            <div class="product-list">
+                {% for product in products %}
+                <div class="product-card">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <h3>{{ product.name }}</h3>
+                    <p>Price: ₹{{ product.price }}</p>
+                    <p>Description: {{ product.description }}</p>
+                    <button onclick="location.href='{% url 'edit_product' product.id %}'">Edit</button>
+                    <button onclick="location.href='{% url 'delete_product' product.id %}'">Delete</button>
+                </div>
+                {% empty %}
+                <p>No products found. Add your first product!</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

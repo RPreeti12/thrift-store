@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+        }
+        .confirmation-box {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .confirmation-box h1 {
+            color: #dc3545;
+            margin-bottom: 20px;
+        }
+        .confirmation-box p {
+            margin-bottom: 20px;
+        }
+        .confirmation-box button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        .cancel-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+        .cancel-btn:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-box">
+        <h1>Delete Product</h1>
+        <p>Are you sure you want to delete "{{ product.name }}"?</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="delete-btn">Yes, Delete</button>
+            <button type="button" class="cancel-btn" onclick="location.href='{% url 'view_products' %}'">Cancel</button>
+        </form>
+    </div>
+</body>
+</html>
