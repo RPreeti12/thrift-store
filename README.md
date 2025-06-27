@@ -1,8 +1,6 @@
+# Online Thrift Store (Django Project)
 
-#  Online Thrift Store
-
-A stylish and user-friendly web-based thrift store built using **HTML5**, **CSS3**, and **Python** for seamless browsing, listing, and purchasing of pre-loved products.
-
+This is a **full-stack web application** built using **Python (Django)**, **HTML5**, and **CSS3** that enables users to browse, list, and purchase thrift items. The project features dynamic product rendering, database integration, and Django admin support.
 ---
 
 ##  Tech Stack
@@ -14,7 +12,6 @@ A stylish and user-friendly web-based thrift store built using **HTML5**, **CSS3
 | **Database**  | SQLite / PostgreSQL *(if used)*   |
 | **Version Control** | Git, GitHub                |
 | **Hosting**   | Localhost *(add deployment info if hosted)* |
-
 ---
 
 ##  features
@@ -26,7 +23,6 @@ A stylish and user-friendly web-based thrift store built using **HTML5**, **CSS3
 -  Checkout & order summary
 -  Clean and responsive UI
 -  Backend logic to handle product listings
-
 ---
 
 ##  How to Run the Project Locally
